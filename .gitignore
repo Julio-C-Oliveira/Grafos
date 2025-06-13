@@ -1,0 +1,3 @@
+# Ignorar os compilados de c:
+*.o
+grafo
