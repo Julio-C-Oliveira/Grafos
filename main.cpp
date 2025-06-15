@@ -1,16 +1,16 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "node.h"
+#include "Base/base.h"
 
 int main() {
     int numDeVertices = 5;
     Graph* grafo = createGraph(numDeVertices);
 
-    addEdge(grafo, 0, 0);
-    addEdge(grafo, 0, 1);
-    addEdge(grafo, 0, 4);
-    addEdge(grafo, 0, 2);
-    addEdge(grafo, 0, 3);
+    addEdge(grafo, 0, 0, 1);
+    addEdge(grafo, 0, 1, 2);
+    addEdge(grafo, 0, 4, 2);
+    addEdge(grafo, 0, 2, 2);
+    addEdge(grafo, 0, 3, 2);
 
     printf("Quantidade de vertices = %d\n", numberOfVertices(grafo));
 

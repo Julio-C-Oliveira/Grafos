@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "node.h"
+#include "base.h"
 
 // Criar um Grafo:
 Graph* createGraph(int numberOfVertices) {
@@ -20,22 +20,39 @@ Graph* createGraph(int numberOfVertices) {
     return graph;
 }
 
-// Criar aresta:
-void addEdge(Graph* graph, int source, int destination) {
-    // Criando uma dupla ligação, para formar a unidirecional.
+void addUnidirectionalEdge(Graph* graph, int source, int destination) {
+    // Criando uma ligação única
     graph->adjacentMatriz[source][destination] = 1;
-    graph->adjacentMatriz[destination][source] = 1;
 
-    Node* newNode = (Node*)malloc(sizeof(Node));
+    Node* newNode = (Node*)malloc(sizeof(Node)); 
     newNode->vertex = destination;
     newNode->next = graph->adjacentList[source];
     graph->adjacentList[source] = newNode;
-
-    newNode = (Node*)malloc(sizeof(Node));
-    newNode->vertex = source;
-    newNode->next = graph->adjacentList[destination];
-    graph->adjacentList[destination] = newNode;
 }
+
+void addBidirectionalEdge(Graph* graph, int source, int destination) {
+    // Criando uma dupla ligação, para formar a bidirecional.
+    addUnidirectionalEdge(graph, source, destination);
+    addUnidirectionalEdge(graph, destination, source);
+}
+
+// Criar aresta:
+void addEdge(Graph* graph, int source, int destination, int type) {
+    switch(type){
+        case 1:
+            addUnidirectionalEdge(graph, source, destination);
+            break;
+        case 2:
+            addBidirectionalEdge(graph, source, destination);
+            break;
+        default:
+            addBidirectionalEdge(graph, source, destination);
+            break;
+    }    
+}
+
+// unidirectional
+// bidirectional
 
 // Calcula o grau de um vértice:
 int degree(Graph* graph, int vertex) {
