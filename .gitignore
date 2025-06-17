@@ -1,3 +1,4 @@
 # Ignorar os compilados de c:
 *.o
 graph
+.vscode/
