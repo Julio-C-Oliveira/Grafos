@@ -1,4 +1,4 @@
-#include "../Base/base.h"
+#include "dfs.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -39,4 +39,59 @@ void runDFS(Graph* graph, int startPoint) {
         if (colors[vertex] == 0) 
             dfsVisit(graph, vertex, colors, predecessors, startTimes, endTimes, &timestamp);
     }
+}
+
+void dfsForConnectivity(Graph* graph, int vertex, char* visited) {
+    visited[vertex] = 1;
+
+    Node* temporaryNode = graph->adjacentList[vertex];
+    while (temporaryNode) {
+        if (!visited[temporaryNode->vertex]) {
+            dfsForConnectivity(graph, temporaryNode->vertex, visited);
+        }
+        temporaryNode = temporaryNode->next;
+    }
+}
+
+void dfsMarkReachable(Graph* graph, int v, bool* visited) {
+    visited[v] = true;
+    for (int i = 0; i < graph->numberOfVertices; i++) {
+        if (graph->adjacentMatriz[v][i] > 0 && !visited[i]) {
+            dfsMarkReachable(graph, i, visited);
+        }
+    }
+}
+
+
+bool isConnect(Graph* graph) {
+    bool* visited = (bool*)calloc(graph->numberOfVertices, sizeof(bool));
+
+    // Encontra o primeiro vértice com grau > 0
+    int start = -1;
+    for (int i = 0; i < graph->numberOfVertices; i++) {
+        if (degree(graph, i) > 0) {
+            start = i;
+            break;
+        }
+    }
+
+    if (start == -1) {
+        // Grafo sem arestas é considerado conexo
+        free(visited);
+        return true;
+    }
+
+    // DFS
+    dfsMarkReachable(graph, start, visited);
+
+    // Verifica se todos os vértices com grau > 0 foram visitados
+    for (int i = 0; i < graph->numberOfVertices; i++) {
+        if (degree(graph, i) > 0 && !visited[i]) {
+            free(visited);
+            return false;
+        }
+    }
+
+    free(visited);
+    return true;
 }

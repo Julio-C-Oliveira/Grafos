@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "Base/base.h"
 #include "Algoritmos/dfs.h"
+#include "Algoritmos/fleury.h"
 
 int main() {
     /*
@@ -41,6 +42,7 @@ int main() {
     Graph* grafoNaoEuleriano = createGraph(numDeVertices); // A saída deve ser 0 para informar que não existe um caminho euleriano.
     Graph* grafoComCicloEuleriano = createGraph(numDeVertices); // A saída deve ser 2 para informar que existe um ciclo euleriano.
     Graph* grafoComCaminhoEuleriano = createGraph(numDeVertices); // A saída deve ser 1 para informar que existe um caminho euleriano, mas não é um ciclo.
+    //Graph* grafoDesconexo = createGraph(numDeVertices); 
 
     addEdge(grafoNaoEuleriano, 2, 1, 2);
     addEdge(grafoNaoEuleriano, 2, 0, 2);
@@ -61,6 +63,11 @@ int main() {
     addEdge(grafoComCaminhoEuleriano, 0, 3, 2);
     addEdge(grafoComCaminhoEuleriano, 3, 4, 2);
 
-    runDFS(grafoComCicloEuleriano, 0);
+    //runDFS(grafoComCicloEuleriano, 0);
+    //printf("Reultado: %b\n", isConnect(grafoComCicloEuleriano));
+    //printf("Reultado: %b\n", isConnect(grafoDesconexo));
+    EulerianPath* resultPath = fleuryFindEulerianPath(grafoComCicloEuleriano);
+    printEulerianPath(resultPath);
+    freeEulerianPath(resultPath);
     return 0;
 }

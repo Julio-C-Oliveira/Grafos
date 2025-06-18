@@ -126,3 +126,27 @@ char* adjacencyListToString(Graph* graph) {
     }
     return str;
 }
+
+void freeGraph(Graph* graph) {
+    if (graph == NULL) return;
+    
+    // Libera a matriz de adjacência
+    for (int i = 0; i < graph->numberOfVertices; i++) {
+        free(graph->adjacentMatriz[i]);
+    }
+    free(graph->adjacentMatriz);
+    
+    // Libera a lista de adjacência
+    for (int i = 0; i < graph->numberOfVertices; i++) {
+        Node* current = graph->adjacentList[i];
+        while (current != NULL) {
+            Node* temp = current;
+            current = current->next;
+            free(temp);
+        }
+    }
+    free(graph->adjacentList);
+    
+    // Libera a estrutura do grafo
+    free(graph);
+}

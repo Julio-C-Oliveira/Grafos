@@ -1,3 +1,6 @@
+#ifndef BASE_H
+#define BASE_H
+
 typedef struct Node {
     int vertex;
     struct Node* next;
@@ -22,3 +25,7 @@ int numberOfEdges(Graph* graph); // Pegar o número de arestas.
 
 char* adjacencyMatrixToString(Graph* graph);
 char* adjacencyListToString(Graph* graph);
+
+void freeGraph(Graph* graph);
+
+#endif
