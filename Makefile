@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -Wall -std=c++17
 TARGET = graph
 
-SOURCES = main.cpp Base/adjacentListGraph.cpp Base/adjacentMatrizGraph.cpp
+SOURCES = main.c Base/adjacentListGraph.c Base/adjacentMatrizGraph.c
 OBJECTS = main.o Base/adjacentListGraph.o Base/adjacentMatrizGraph.o
 
 all: $(TARGET)
@@ -10,7 +10,7 @@ all: $(TARGET)
 $(TARGET): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-%.o: %.cpp
+%.o: %.c
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
