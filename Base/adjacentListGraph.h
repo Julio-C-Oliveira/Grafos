@@ -4,26 +4,26 @@
 #include "../general.h"
 
 // Estrutura para o nó da lista de adjacência.
-typedef struct Node {
+typedef struct Node_list {
     int destination;
     int weight;
-    struct Node* next;
-} Node;
+    struct Node_list* next;
+} Node_list;
 
 // Estrutura do grafo por lista de adjacência.
 typedef struct {
     int numberOfVertices;
     bool driven; // Se ele é direcionado ou não.
-    Node** adjacentList; // Um array onde cada elemento é um nó.
-} AdjacentListGraph;
+    Node_list** adjacentList; // Um array onde cada elemento é um nó.
+} AdjacentGraph_list;
 
-Node* createNode(int destination, int weight);
-AdjacentListGraph* createAdjacentListGraph(int numberOfVertices, bool driven);
+Node_list* createNode_list(int destination, int weight);
+AdjacentGraph_list* createAdjacentGraph_list(int numberOfVertices, bool driven);
 
-void addEdge(AdjacentListGraph* graph, int source, int destination, int weight);
-void displayGraph(AdjacentListGraph* graph);
-void freeGraph(AdjacentListGraph* graph);
+void addEdge_list(AdjacentGraph_list* graph, int source, int destination, int weight);
+void displayGraph_list(AdjacentGraph_list* graph);
+void freeGraph_list(AdjacentGraph_list* graph);
 
-int getNumberOfVertices(AdjacentListGraph* graph);
+int getNumberOfVertices_list(AdjacentGraph_list* graph);
 
 #endif 

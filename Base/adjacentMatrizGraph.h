@@ -8,13 +8,13 @@ typedef struct {
     int numberOfVertices;
     bool driven;
     int** adjacentMatriz;
-} AdjacentMatrizGraph;
+} AdjacentGraph_matriz;
 
-AdjacentMatrizGraph* createAdjacentMatrizGraph(int numberOfVertices, bool driven);
-void addEdge(AdjacentMatrizGraph* graph, int source, int destination, int weight);
-void displayGraph(AdjacentMatrizGraph* graph);
-void freeGraph(AdjacentMatrizGraph* graph);
+AdjacentGraph_matriz* createAdjacentGraph_matriz(int numberOfVertices, bool driven);
+void addEdge_matriz(AdjacentGraph_matriz* graph, int source, int destination, int weight);
+void displayGraph_matriz(AdjacentGraph_matriz* graph);
+void freeGraph_matriz(AdjacentGraph_matriz* graph);
 
-int getNumberOfVertices(AdjacentMatrizGraph* graph);
+int getNumberOfVertices_matriz(AdjacentGraph_matriz* graph);
 
 #endif 
