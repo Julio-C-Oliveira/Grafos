@@ -2,8 +2,8 @@ CXX = g++
 CXXFLAGS = -Wall -std=c++17
 TARGET = graph
 
-SOURCES = main.c Base/adjacentListGraph.c Base/adjacentMatrizGraph.c
-OBJECTS = main.o Base/adjacentListGraph.o Base/adjacentMatrizGraph.o
+SOURCES = main.c Base/adjacentListGraph.c Base/adjacentMatrizGraph.c Algoritmos/dfs.c
+OBJECTS = main.o Base/adjacentListGraph.o Base/adjacentMatrizGraph.o Algoritmos/dfs.o
 
 all: $(TARGET)
 
