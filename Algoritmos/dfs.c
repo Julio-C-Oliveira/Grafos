@@ -1,30 +1,53 @@
 #include "dfs.h"
 
-void dfsVisit_list(AdjacentGraph_list* graph, int vertex, bool visited[]) {
-    visited[vertex] = true;
+void dfsVisit_list(AdjacentGraph_list* graph, int vertex, DFS_AuxiliaryAttributes* auxiliaryAttibutes, int* timestamp) {
+    ++(*timestamp);
+    auxiliaryAttibutes[vertex].color = 'G';
+    auxiliaryAttibutes[vertex].startTime = (*timestamp); 
+
     printf("Visitando vértice %d\n", vertex);
 
     Node_list* currentNode = graph->adjacentList[vertex];
     while (currentNode != NULL) {
         int neighbor = currentNode->destination;
-        if (!visited[neighbor])
-            dfsVisit_list(graph, neighbor, visited);
+        if (auxiliaryAttibutes[neighbor].color == 'W') {
+            auxiliaryAttibutes[vertex].predecessor = vertex;
+            dfsVisit_list(graph, neighbor, auxiliaryAttibutes, timestamp);
+        }
         currentNode = currentNode->next;
     }
+
+    ++(*timestamp);
+    auxiliaryAttibutes[vertex].color = 'B';
+    auxiliaryAttibutes[vertex].endTime = (*timestamp);
 }
 
 void dfs_list(AdjacentGraph_list* graph, int startVertex) {
-    bool* visited = (bool*)calloc(graph->numberOfVertices, sizeof(bool));
+    DFS_AuxiliaryAttributes* auxiliaryAttibutes = (DFS_AuxiliaryAttributes*)malloc(graph->numberOfVertices*sizeof(DFS_AuxiliaryAttributes));
 
-    if (!visited) {
+    if (!auxiliaryAttibutes) {
         fprintf(stderr, "Erro de alocação de memória.\n");
         return;
     }
 
-    printf("Iniciando DFS com o vértice %d\n", startVertex);
-    dfsVisit_list(graph, startVertex, visited);
+    int timestamp = 0;
+    for (int i = 0; i < graph->numberOfVertices; i++) {
+        auxiliaryAttibutes[i].color = 'W';
+        auxiliaryAttibutes[i].startTime = -1;
+        auxiliaryAttibutes[i].endTime = -1;
+        auxiliaryAttibutes[i].predecessor = -1;
+    }
 
-    free(visited);
+    printf("Iniciando DFS com o vértice %d\n", startVertex);
+
+    dfsVisit_list(graph, startVertex, auxiliaryAttibutes, &timestamp);
+
+    for (int i = 0; i < graph->numberOfVertices; i++) {
+        if (auxiliaryAttibutes[i].color == 'W')
+            dfsVisit_list(graph, i, auxiliaryAttibutes, &timestamp);
+    }
+
+    free(auxiliaryAttibutes);
 }
 
 void dfsVisit_matriz(AdjacentGraph_matriz* graph, int vertex, bool visited[]) {
@@ -47,6 +70,11 @@ void dfs_matriz(AdjacentGraph_matriz* graph, int startVertex) {
 
     printf("Iniciando DFS com o vértice %d\n", startVertex);
     dfsVisit_matriz(graph, startVertex, visited);
+
+    for (int i = 0; i < graph->numberOfVertices; i++) {
+        if (!visited[i])
+            dfsVisit_matriz(graph, i, visited);
+    }
 
     free(visited);
 }
