@@ -24,4 +24,6 @@ void addEdge(AdjacentListGraph* graph, int source, int destination, int weight);
 void displayGraph(AdjacentListGraph* graph);
 void freeGraph(AdjacentListGraph* graph);
 
+int getNumberOfVertices(AdjacentListGraph* graph);
+
 #endif 

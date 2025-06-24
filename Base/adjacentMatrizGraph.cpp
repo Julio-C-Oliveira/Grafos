@@ -34,3 +34,7 @@ void freeGraph(AdjacentMatrizGraph* graph) {
     free(graph->adjacentMatriz);
     free(graph);
 }
+
+int getNumberOfVertices(AdjacentMatrizGraph* graph) {
+    return graph->numberOfVertices;
+}

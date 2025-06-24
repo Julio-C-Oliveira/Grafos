@@ -15,4 +15,6 @@ void addEdge(AdjacentMatrizGraph* graph, int source, int destination, int weight
 void displayGraph(AdjacentMatrizGraph* graph);
 void freeGraph(AdjacentMatrizGraph* graph);
 
+int getNumberOfVertices(AdjacentMatrizGraph* graph);
+
 #endif 

@@ -56,3 +56,7 @@ void freeGraph(AdjacentListGraph* graph) {
     free(graph->adjacentList);
     free(graph);
 }
+
+int getNumberOfVertices(AdjacentListGraph* graph) {
+    return graph->numberOfVertices;
+}
