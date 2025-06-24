@@ -14,9 +14,10 @@ int main() {
     addEdge(adjacentListGraph, 3, 4, 1);
 
     displayGraph(adjacentListGraph);
+    printf("Número de vértices: %d\n", getNumberOfVertices(adjacentListGraph));
     freeGraph(adjacentListGraph);
 
-    printf("Grafo com matriz de adjacência:\n");
+    printf("\nGrafo com matriz de adjacência:\n");
     AdjacentMatrizGraph* adjacentMatrizGraph = createAdjacentMatrizGraph(5, false);
 
     addEdge(adjacentMatrizGraph, 2, 1, 1);
@@ -27,6 +28,7 @@ int main() {
     addEdge(adjacentMatrizGraph, 3, 4, 1);
 
     displayGraph(adjacentMatrizGraph);
+    printf("Número de vértices: %d\n", getNumberOfVertices(adjacentMatrizGraph));
     freeGraph(adjacentMatrizGraph);
     return 0;
 }
