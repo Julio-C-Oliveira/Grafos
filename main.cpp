@@ -1,47 +1,37 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include "Base/base.h"
-#include "Algoritmos/dfs.h"
+#include "general.h"
+#include "Base/adjacentListGraph.h"
+#include "Base/adjacentMatrizGraph.h"
 
 int main() {
-    /*
-    // Testando a base do grafo:
-    int numDeVertices = 5;
-    Graph* grafo = createGraph(numDeVertices);
+    printf("Grafo com lista de adjacência:\n");
+    AdjacentListGraph* adjacentListGraph = createAdjacentListGraph(5, false);
 
-    addEdge(grafo, 0, 0, 1);
-    addEdge(grafo, 0, 1, 2);
-    addEdge(grafo, 0, 4, 2);
-    addEdge(grafo, 0, 2, 2);
-    addEdge(grafo, 0, 3, 2);
-    addEdge(grafo, 4, 4, 1);
-    addEdge(grafo, 4, 1, 2);
-    addEdge(grafo, 4, 2, 2);
-    addEdge(grafo, 4, 3, 2);
+    addEdge(adjacentListGraph, 2, 1, 1);
+    addEdge(adjacentListGraph, 2, 0, 1);
+    addEdge(adjacentListGraph, 1, 0, 1);
+    addEdge(adjacentListGraph, 1, 3, 1);
+    addEdge(adjacentListGraph, 0, 3, 1);
+    addEdge(adjacentListGraph, 3, 4, 1);
 
-    printf("Quantidade de vertices = %d\n", numberOfVertices(grafo));
+    displayGraph(adjacentListGraph);
+    freeGraph(adjacentListGraph);
 
-    printf("Quantidade de arestas = %d\n", numberOfEdges(grafo));
+    printf("Grafo com matriz de adjacência:\n");
+    AdjacentMatrizGraph* adjacentMatrizGraph = createAdjacentMatrizGraph(5, false);
 
-    char* matriz = adjacencyMatrixToString(grafo);
-    printf("Matriz de adjacencias:\n%s", matriz);
-    free(matriz);
+    addEdge(adjacentMatrizGraph, 2, 1, 1);
+    addEdge(adjacentMatrizGraph, 2, 0, 1);
+    addEdge(adjacentMatrizGraph, 1, 0, 1);
+    addEdge(adjacentMatrizGraph, 1, 3, 1);
+    addEdge(adjacentMatrizGraph, 0, 3, 1);
+    addEdge(adjacentMatrizGraph, 3, 4, 1);
 
-    char* lista = adjacencyListToString(grafo);
-    printf("Lista de adjacencias:\n%s", lista);
-    free(lista);
+    displayGraph(adjacentMatrizGraph);
+    freeGraph(adjacentMatrizGraph);
+    return 0;
+}
 
-    for(int i = 0; i < numDeVertices; i++) {
-        printf("Grau do vertice %d = %d\n", i, degree(grafo, i)); 
-    }
-    */
-    
-    // Testando o Algoritmo de Fleury:
-    int numDeVertices = 5;
-    Graph* grafoNaoEuleriano = createGraph(numDeVertices); // A saída deve ser 0 para informar que não existe um caminho euleriano.
-    Graph* grafoComCicloEuleriano = createGraph(numDeVertices); // A saída deve ser 2 para informar que existe um ciclo euleriano.
-    Graph* grafoComCaminhoEuleriano = createGraph(numDeVertices); // A saída deve ser 1 para informar que existe um caminho euleriano, mas não é um ciclo.
-
+/*
     addEdge(grafoNaoEuleriano, 2, 1, 2);
     addEdge(grafoNaoEuleriano, 2, 0, 2);
     addEdge(grafoNaoEuleriano, 1, 0, 2);
@@ -60,7 +50,4 @@ int main() {
     addEdge(grafoComCaminhoEuleriano, 2, 0, 2);
     addEdge(grafoComCaminhoEuleriano, 0, 3, 2);
     addEdge(grafoComCaminhoEuleriano, 3, 4, 2);
-
-    runDFS(grafoComCicloEuleriano, 0);
-    return 0;
-}
+*/
