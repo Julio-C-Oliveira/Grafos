@@ -2,7 +2,7 @@
 
 void dfsVisit_list(AdjacentGraph_list* graph, int vertex, DFS_AuxiliaryAttributes* auxiliaryAttibutes, int* timestamp) {
     ++(*timestamp);
-    auxiliaryAttibutes[vertex].color = 'G';
+    auxiliaryAttibutes[vertex].color = GRAY;
     auxiliaryAttibutes[vertex].startTime = (*timestamp); 
 
     printf("Visitando vértice %d\n", vertex);
@@ -10,7 +10,7 @@ void dfsVisit_list(AdjacentGraph_list* graph, int vertex, DFS_AuxiliaryAttribute
     Node_list* currentNode = graph->adjacentList[vertex];
     while (currentNode != NULL) {
         int neighbor = currentNode->destination;
-        if (auxiliaryAttibutes[neighbor].color == 'W') {
+        if (auxiliaryAttibutes[neighbor].color == WHITE) {
             auxiliaryAttibutes[neighbor].predecessor = vertex;
             dfsVisit_list(graph, neighbor, auxiliaryAttibutes, timestamp);
         }
@@ -18,7 +18,7 @@ void dfsVisit_list(AdjacentGraph_list* graph, int vertex, DFS_AuxiliaryAttribute
     }
 
     ++(*timestamp);
-    auxiliaryAttibutes[vertex].color = 'B';
+    auxiliaryAttibutes[vertex].color = BLACK;
     auxiliaryAttibutes[vertex].endTime = (*timestamp);
 }
 
@@ -32,10 +32,10 @@ void dfs_list(AdjacentGraph_list* graph, int startVertex) {
 
     int timestamp = 0;
     for (int i = 0; i < graph->numberOfVertices; i++) {
-        auxiliaryAttibutes[i].color = 'W';
-        auxiliaryAttibutes[i].startTime = -1;
-        auxiliaryAttibutes[i].endTime = -1;
-        auxiliaryAttibutes[i].predecessor = -1;
+        auxiliaryAttibutes[i].color = WHITE;
+        auxiliaryAttibutes[i].startTime = NULLNUMBER;
+        auxiliaryAttibutes[i].endTime = NULLNUMBER;
+        auxiliaryAttibutes[i].predecessor = NULLNUMBER;
     }
 
     printf("Iniciando DFS com o vértice %d\n", startVertex);
@@ -43,7 +43,7 @@ void dfs_list(AdjacentGraph_list* graph, int startVertex) {
     dfsVisit_list(graph, startVertex, auxiliaryAttibutes, &timestamp);
 
     for (int i = 0; i < graph->numberOfVertices; i++) {
-        if (auxiliaryAttibutes[i].color == 'W')
+        if (auxiliaryAttibutes[i].color == WHITE)
             dfsVisit_list(graph, i, auxiliaryAttibutes, &timestamp);
     }
 
@@ -52,20 +52,20 @@ void dfs_list(AdjacentGraph_list* graph, int startVertex) {
 
 void dfsVisit_matriz(AdjacentGraph_matriz* graph, int vertex, DFS_AuxiliaryAttributes* auxiliaryAttibutes, int* timestamp) {
     ++(*timestamp);
-    auxiliaryAttibutes[vertex].color = 'G';
+    auxiliaryAttibutes[vertex].color = GRAY;
     auxiliaryAttibutes[vertex].startTime = (*timestamp); 
 
     printf("Visitando vértice %d\n", vertex);
 
     for (int neighbor = graph->numberOfVertices - 1; neighbor >= 0; neighbor--) {
-        if (graph->adjacentMatriz[vertex][neighbor] != 0 && auxiliaryAttibutes[neighbor].color == 'W') {
+        if (graph->adjacentMatriz[vertex][neighbor] != 0 && auxiliaryAttibutes[neighbor].color == WHITE) {
             auxiliaryAttibutes[neighbor].predecessor = vertex;
             dfsVisit_matriz(graph, neighbor, auxiliaryAttibutes, timestamp);
         }
     }
 
     ++(*timestamp);
-    auxiliaryAttibutes[vertex].color = 'B';
+    auxiliaryAttibutes[vertex].color = BLACK;
     auxiliaryAttibutes[vertex].endTime = (*timestamp);
 }
 
@@ -79,10 +79,10 @@ void dfs_matriz(AdjacentGraph_matriz* graph, int startVertex) {
 
     int timestamp = 0;
     for (int i = 0; i < graph->numberOfVertices; i++) {
-        auxiliaryAttibutes[i].color = 'W';
-        auxiliaryAttibutes[i].startTime = -1;
-        auxiliaryAttibutes[i].endTime = -1;
-        auxiliaryAttibutes[i].predecessor = -1;
+        auxiliaryAttibutes[i].color = WHITE;
+        auxiliaryAttibutes[i].startTime = NULLNUMBER;
+        auxiliaryAttibutes[i].endTime = NULLNUMBER;
+        auxiliaryAttibutes[i].predecessor = NULLNUMBER;
     }
 
     printf("Iniciando DFS com o vértice %d\n", startVertex);
@@ -90,7 +90,7 @@ void dfs_matriz(AdjacentGraph_matriz* graph, int startVertex) {
     dfsVisit_matriz(graph, startVertex, auxiliaryAttibutes, &timestamp);
 
     for (int i = 0; i < graph->numberOfVertices; i++) {
-        if (auxiliaryAttibutes[i].color == 'W')
+        if (auxiliaryAttibutes[i].color == WHITE)
             dfsVisit_matriz(graph, i, auxiliaryAttibutes, &timestamp);
     }
 

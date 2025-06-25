@@ -4,6 +4,8 @@
 #include "../Base/adjacentListGraph.h"
 #include "../Base/adjacentMatrizGraph.h"
 
+#include "defines.h"
+
 typedef struct {
     char color;
     int startTime;
