@@ -2,6 +2,8 @@
 #include "libraries.h"
 
 int main() {
+    int startVertex = 0; int endVertex = 4;
+
     printf("Não Euleriano ====================================================================================== ||||\n");
     printf("Grafo com lista de adjacência: ====================================== ||\n");
     AdjacentGraph_list* adjacentListGraphNaoEuleriano = createAdjacentGraph_list(5, false);
@@ -15,9 +17,11 @@ int main() {
 
     displayGraph_list(adjacentListGraphNaoEuleriano);
     printf("\nNúmero de vértices: %d\n\n", getNumberOfVertices_list(adjacentListGraphNaoEuleriano));
-    dfs_list(adjacentListGraphNaoEuleriano, 0);
+    dfs_list(adjacentListGraphNaoEuleriano, startVertex);
     printf("\n");
-    bfs_list(adjacentListGraphNaoEuleriano, 0);
+    bfs_list(adjacentListGraphNaoEuleriano, startVertex);
+    printf("\n");
+    printf("De %d para %d são necessários %d passos.\n", startVertex, endVertex, bfsCalculateStepSize_list(adjacentListGraphNaoEuleriano, startVertex, endVertex));
     freeGraph_list(adjacentListGraphNaoEuleriano);
 
     printf("\nGrafo com matriz de adjacência: ====================================== ||\n");
@@ -35,8 +39,9 @@ int main() {
     dfs_matriz(adjacentMatrizGraphNaoEuleriano, 0);
     printf("\n");
     bfs_matriz(adjacentMatrizGraphNaoEuleriano, 0);
+    printf("\n");
+    printf("De %d para %d são necessários %d passos.\n", startVertex, endVertex, bfsCalculateStepSize_matriz(adjacentMatrizGraphNaoEuleriano, startVertex, endVertex));
     freeGraph_matriz(adjacentMatrizGraphNaoEuleriano);
-
 
     printf("\n\nCiclo Euleriano ====================================================================================== ||||\n");
     printf("Grafo com lista de adjacência: ====================================== ||\n");
