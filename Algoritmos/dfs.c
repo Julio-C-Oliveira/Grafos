@@ -57,7 +57,7 @@ void dfsVisit_matriz(AdjacentGraph_matriz* graph, int vertex, DFS_AuxiliaryAttri
 
     printf("Visitando vértice %d\n", vertex);
 
-    for (int neighbor = graph->numberOfVertices - 1; neighbor >= 0; neighbor--) {
+    for (int neighbor = 0; neighbor < graph->numberOfVertices; neighbor++) {
         if (graph->adjacentMatriz[vertex][neighbor] != 0 && auxiliaryAttibutes[neighbor].color == WHITE) {
             auxiliaryAttibutes[neighbor].predecessor = vertex;
             dfsVisit_matriz(graph, neighbor, auxiliaryAttibutes, timestamp);
