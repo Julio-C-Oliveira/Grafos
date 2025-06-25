@@ -1,6 +1,8 @@
 #ifndef DEFINES
 #define DEFINES
 
+#include <limits.h>
+
 #define WHITE 'W'
 #define GRAY 'G'
 #define BLACK 'B'

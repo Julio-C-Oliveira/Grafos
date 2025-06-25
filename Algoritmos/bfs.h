@@ -6,8 +6,6 @@
 
 #include "defines.h"
 
-#include <limits.h>
-
 typedef struct {
     char color;
     int distance;
