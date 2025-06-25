@@ -20,13 +20,13 @@ AdjacentGraph_list* createAdjacentGraph_list(int numberOfVertices, bool driven) 
     return graph;
 }
 
-void addEdge_list(AdjacentGraph_list* graph, int source, int destination, int weight) {
+void addEdge_list(AdjacentGraph_list* graph, int origin, int destination, int weight) {
     Node_list* newNode = createNode_list(destination, weight);
-    newNode->next = graph->adjacentList[source];
-    graph->adjacentList[source] = newNode;
+    newNode->next = graph->adjacentList[origin];
+    graph->adjacentList[origin] = newNode;
 
     if (!graph->driven) {
-        newNode = createNode_list(source, weight);
+        newNode = createNode_list(origin, weight);
         newNode->next = graph->adjacentList[destination];
         graph->adjacentList[destination] = newNode;
     }

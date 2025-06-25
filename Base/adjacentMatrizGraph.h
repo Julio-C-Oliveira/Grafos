@@ -11,7 +11,7 @@ typedef struct {
 } AdjacentGraph_matriz;
 
 AdjacentGraph_matriz* createAdjacentGraph_matriz(int numberOfVertices, bool driven);
-void addEdge_matriz(AdjacentGraph_matriz* graph, int source, int destination, int weight);
+void addEdge_matriz(AdjacentGraph_matriz* graph, int origin, int destination, int weight);
 void displayGraph_matriz(AdjacentGraph_matriz* graph);
 void freeGraph_matriz(AdjacentGraph_matriz* graph);
 

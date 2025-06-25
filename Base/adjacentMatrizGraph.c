@@ -13,11 +13,11 @@ AdjacentGraph_matriz* createAdjacentGraph_matriz(int numberOfVertices, bool driv
     return graph;
 }
 
-void addEdge_matriz(AdjacentGraph_matriz* graph, int source, int destination, int weight) {
-    graph->adjacentMatriz[source][destination] = weight;
+void addEdge_matriz(AdjacentGraph_matriz* graph, int origin, int destination, int weight) {
+    graph->adjacentMatriz[origin][destination] = weight;
 
     if (!graph->driven)
-        graph->adjacentMatriz[destination][source] = weight;
+        graph->adjacentMatriz[destination][origin] = weight;
 }
 
 void displayGraph_matriz(AdjacentGraph_matriz* graph) {

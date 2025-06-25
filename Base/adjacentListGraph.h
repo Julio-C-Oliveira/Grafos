@@ -20,7 +20,7 @@ typedef struct {
 Node_list* createNode_list(int destination, int weight);
 AdjacentGraph_list* createAdjacentGraph_list(int numberOfVertices, bool driven);
 
-void addEdge_list(AdjacentGraph_list* graph, int source, int destination, int weight);
+void addEdge_list(AdjacentGraph_list* graph, int origin, int destination, int weight);
 void displayGraph_list(AdjacentGraph_list* graph);
 void freeGraph_list(AdjacentGraph_list* graph);
 
