@@ -43,6 +43,8 @@ int main() {
     bfs_matriz(adjacentMatrizGraphNaoEuleriano, 0);
     printf("\n");
     printf("De %d para %d são necessários %d passos.\n", startVertex, endVertex, bfsCalculateStepSize_matriz(adjacentMatrizGraphNaoEuleriano, startVertex, endVertex));
+    printf("\n");
+    dfsCycleSearch_matriz(adjacentMatrizGraphNaoEuleriano, startVertex);
     freeGraph_matriz(adjacentMatrizGraphNaoEuleriano);
 
     printf("\n\nCiclo Euleriano ====================================================================================== ||||\n");
@@ -84,6 +86,8 @@ int main() {
     bfs_matriz(adjacentMatrizGraphComCicloEuleriano, 0);
     printf("\n");
     printf("De %d para %d são necessários %d passos.\n", startVertex, endVertex, bfsCalculateStepSize_matriz(adjacentMatrizGraphComCicloEuleriano, startVertex, endVertex));
+    printf("\n");
+    dfsCycleSearch_matriz(adjacentMatrizGraphComCicloEuleriano, startVertex);
     freeGraph_matriz(adjacentMatrizGraphComCicloEuleriano);
 
 
@@ -122,6 +126,8 @@ int main() {
     bfs_matriz(adjacentMatrizGraphComCaminhoEuleriano, 0);
     printf("\n");
     printf("De %d para %d são necessários %d passos.\n", startVertex, endVertex, bfsCalculateStepSize_matriz(adjacentMatrizGraphComCaminhoEuleriano, startVertex, endVertex));
+    printf("\n");
+    dfsCycleSearch_matriz(adjacentMatrizGraphComCaminhoEuleriano, startVertex);
     freeGraph_matriz(adjacentMatrizGraphComCaminhoEuleriano);
     return 0;
 }
