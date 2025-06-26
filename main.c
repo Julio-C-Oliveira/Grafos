@@ -22,6 +22,8 @@ int main() {
     bfs_list(adjacentListGraphNaoEuleriano, startVertex);
     printf("\n");
     printf("De %d para %d são necessários %d passos.\n", startVertex, endVertex, bfsCalculateStepSize_list(adjacentListGraphNaoEuleriano, startVertex, endVertex));
+    printf("\n");
+    dfsCycleSearch_list(adjacentListGraphNaoEuleriano, startVertex);
     freeGraph_list(adjacentListGraphNaoEuleriano);
 
     printf("\nGrafo com matriz de adjacência: ====================================== ||\n");
@@ -61,6 +63,8 @@ int main() {
     bfs_list(adjacentListGraphComCicloEuleriano, 0);
     printf("\n");
     printf("De %d para %d são necessários %d passos.\n", startVertex, endVertex, bfsCalculateStepSize_list(adjacentListGraphComCicloEuleriano, startVertex, endVertex));
+    printf("\n");
+    dfsCycleSearch_list(adjacentListGraphComCicloEuleriano, startVertex);
     freeGraph_list(adjacentListGraphComCicloEuleriano);
 
     printf("\nGrafo com matriz de adjacência: ====================================== ||\n");
@@ -99,6 +103,8 @@ int main() {
     bfs_list(adjacentListGraphComCaminhoEuleriano, 0);
     printf("\n");
     printf("De %d para %d são necessários %d passos.\n", startVertex, endVertex, bfsCalculateStepSize_list(adjacentListGraphComCaminhoEuleriano, startVertex, endVertex));
+    printf("\n");
+    dfsCycleSearch_list(adjacentListGraphComCaminhoEuleriano, startVertex);
     freeGraph_list(adjacentListGraphComCaminhoEuleriano);
 
     printf("\nGrafo com matriz de adjacência: ====================================== ||\n");
