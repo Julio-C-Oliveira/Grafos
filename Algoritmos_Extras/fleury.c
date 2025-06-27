@@ -17,3 +17,7 @@ C <- C{v}; imprimir C
 Regra da Ponte: Se uma aresta (v,w) é uma ponte no grafo induzido pelas arestas não marcadas, 
 então (v,w) só deve ser escolhido pelo algoritmo caso não exista qualquer outra opção.
 */
+
+void fleury_list() {
+    
+}
