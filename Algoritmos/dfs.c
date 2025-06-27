@@ -181,8 +181,8 @@ void dfs_matriz(AdjacentGraph_matriz* graph, int startVertex) {
     free(auxiliaryAttibutes);
 }
 
-
-bool dfsVisitCycleSearch_matriz(AdjacentGraph_matriz* graph, int vertex, DFS_AuxiliaryAttributes* auxiliaryAttibutes, int* timestamp, int* cycleStart, int* cycleEnd) {
+// O erro persiste, o problema está no modo como a implementação funciona, avaliando até as areastas inexistentes, diferente da implementação de lista.
+void dfsVisitCycleSearch_matriz(AdjacentGraph_matriz* graph, int vertex, DFS_AuxiliaryAttributes* auxiliaryAttibutes, int* timestamp, int* cycleStart, int* cycleEnd, bool* hasCycle) {
     ++(*timestamp);
     auxiliaryAttibutes[vertex].color = GRAY;
     auxiliaryAttibutes[vertex].startTime = (*timestamp); 
@@ -190,23 +190,24 @@ bool dfsVisitCycleSearch_matriz(AdjacentGraph_matriz* graph, int vertex, DFS_Aux
     printf("Visitando vértice %d\n", vertex);
 
     for (int neighbor = 0; neighbor < graph->numberOfVertices; neighbor++) {
-        if (graph->adjacentMatriz[vertex][neighbor] != 0 && auxiliaryAttibutes[neighbor].color == WHITE) {
-            auxiliaryAttibutes[neighbor].predecessor = vertex;
-            if (dfsVisitCycleSearch_matriz(graph, neighbor, auxiliaryAttibutes, timestamp, cycleStart, cycleEnd) == true) 
-                return true;
-        } else if (auxiliaryAttibutes[neighbor].color == GRAY && neighbor != auxiliaryAttibutes[vertex].predecessor) {
-            *cycleStart = neighbor;
-            *cycleEnd = vertex;
-            printf("ERROR: vizinho %d, vértice %d\n", neighbor, vertex);
-            return true; // Aqui é o gatilho de encontro de ciclo. o if é só pra proagar essa resposta.
+        if (*hasCycle == true) 
+            return;
+        if (graph->adjacentMatriz[vertex][neighbor] != 0 ) {
+            if (auxiliaryAttibutes[neighbor].color == WHITE) {
+                auxiliaryAttibutes[neighbor].predecessor = vertex;
+                dfsVisitCycleSearch_matriz(graph, neighbor, auxiliaryAttibutes, timestamp, cycleStart, cycleEnd, hasCycle);
+            } else if (auxiliaryAttibutes[neighbor].color == GRAY && neighbor != auxiliaryAttibutes[vertex].predecessor) { // O bug está sendo ocasionado por essa linha. Pois, não existe a verificação de existência da aresta.
+                *cycleStart = neighbor;
+                *cycleEnd = vertex;
+                *hasCycle = true;
+                return; // Aqui é o gatilho de encontro de ciclo. o if é só pra proagar essa resposta.
+            }
         }
     }
 
     ++(*timestamp);
     auxiliaryAttibutes[vertex].color = BLACK;
     auxiliaryAttibutes[vertex].endTime = (*timestamp);
-
-    return false; // Se não parou no if do loop é porque não tem loop.
 }
 
 void dfsCycleSearch_matriz(AdjacentGraph_matriz* graph, int startVertex) {
@@ -228,8 +229,11 @@ void dfsCycleSearch_matriz(AdjacentGraph_matriz* graph, int startVertex) {
     printf("Iniciando DFS com o vértice %d\n", startVertex);
 
     int cycleStart = NULLNUMBER, cycleEnd = NULLNUMBER;
+    bool hasCycle = false;
 
-    if (dfsVisitCycleSearch_matriz(graph, startVertex, auxiliaryAttibutes, &timestamp, &cycleStart, &cycleEnd) == true) {
+    dfsVisitCycleSearch_matriz(graph, startVertex, auxiliaryAttibutes, &timestamp, &cycleStart, &cycleEnd, &hasCycle);
+
+    if (hasCycle == true) {
         printf("Ciclo encontrado:\n|- ");
         int currentVertex = cycleEnd;
         while (currentVertex != cycleStart && currentVertex != NULLNUMBER) {
@@ -243,11 +247,11 @@ void dfsCycleSearch_matriz(AdjacentGraph_matriz* graph, int startVertex) {
         return;
     }
 
-    // Um erro está ocorrendo aqui, self-loops que nem existem estão aparecendo, 0 <- 0.
-
     for (int i = 0; i < graph->numberOfVertices; i++) {
         if (auxiliaryAttibutes[i].color == WHITE) {
-            if (dfsVisitCycleSearch_matriz(graph, i, auxiliaryAttibutes, &timestamp, &cycleStart, &cycleEnd) == true) {
+            dfsVisitCycleSearch_matriz(graph, i, auxiliaryAttibutes, &timestamp, &cycleStart, &cycleEnd, &hasCycle);
+
+            if (hasCycle == true) {
                 printf("Ciclo encontrado:\n|- ");
                 int currentVertex = cycleEnd;
                 while (currentVertex != cycleStart && currentVertex != NULLNUMBER) {

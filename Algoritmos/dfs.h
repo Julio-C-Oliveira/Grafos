@@ -22,7 +22,7 @@ void dfs_matriz(AdjacentGraph_matriz* graph, int startVertex);
 bool dfsVisitCycleSearch_list(AdjacentGraph_list* graph, int vertex, DFS_AuxiliaryAttributes* auxiliaryAttibutes, int* timestamp, int* cycleStart, int* cycleEnd);
 void dfsCycleSearch_list(AdjacentGraph_list* graph, int startVertex);
 
-bool dfsVisitCycleSearch_matriz(AdjacentGraph_matriz* graph, int vertex, DFS_AuxiliaryAttributes* auxiliaryAttibutes, int* timestamp, int* cycleStart, int* cycleEnd);
+void dfsVisitCycleSearch_matriz(AdjacentGraph_matriz* graph, int vertex, DFS_AuxiliaryAttributes* auxiliaryAttibutes, int* timestamp, int* cycleStart, int* cycleEnd, bool* hasCycle);
 void dfsCycleSearch_matriz(AdjacentGraph_matriz* graph, int startVertex);
 
 #endif
