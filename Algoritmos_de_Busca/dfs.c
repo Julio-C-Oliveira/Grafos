@@ -269,3 +269,34 @@ void dfsCycleSearch_matriz(AdjacentGraph_matriz* graph, int startVertex) {
 
     free(auxiliaryAttibutes);
 }
+
+int dfsGetNumberOfConnectedComponents_list(AdjacentGraph_list* graph, int startVertex) {
+    DFS_AuxiliaryAttributes* auxiliaryAttibutes = (DFS_AuxiliaryAttributes*)malloc(graph->numberOfVertices*sizeof(DFS_AuxiliaryAttributes));
+
+    if (!auxiliaryAttibutes) {
+        fprintf(stderr, "Erro de alocação de memória.\n");
+        return NULLNUMBER;
+    }
+
+    int timestamp = 0;
+    for (int i = 0; i < graph->numberOfVertices; i++) {
+        auxiliaryAttibutes[i].color = WHITE;
+        auxiliaryAttibutes[i].startTime = NULLNUMBER;
+        auxiliaryAttibutes[i].endTime = NULLNUMBER;
+        auxiliaryAttibutes[i].predecessor = NULLNUMBER;
+    }
+
+    printf("Iniciando DFS com o vértice %d\n", startVertex);
+
+    dfsVisit_list(graph, startVertex, auxiliaryAttibutes, &timestamp);
+
+    int nullPredecessorCounter = 0;
+    for (int i = 0; i < graph->numberOfVertices; i++) {
+        if (auxiliaryAttibutes[i].predecessor == NULLNUMBER)
+            nullPredecessorCounter++;
+    }
+
+    free(auxiliaryAttibutes);
+
+    return nullPredecessorCounter;
+}

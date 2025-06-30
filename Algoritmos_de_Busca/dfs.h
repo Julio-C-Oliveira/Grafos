@@ -25,4 +25,6 @@ void dfsCycleSearch_list(AdjacentGraph_list* graph, int startVertex);
 void dfsVisitCycleSearch_matriz(AdjacentGraph_matriz* graph, int vertex, DFS_AuxiliaryAttributes* auxiliaryAttibutes, int* timestamp, int* cycleStart, int* cycleEnd, bool* hasCycle);
 void dfsCycleSearch_matriz(AdjacentGraph_matriz* graph, int startVertex);
 
+int dfsGetNumberOfConnectedComponents_list(AdjacentGraph_list* graph, int startVertex);
+
 #endif
