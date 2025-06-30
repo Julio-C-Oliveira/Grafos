@@ -5,9 +5,9 @@
 
 // Estrutura para o nó da lista de adjacência.
 typedef struct Node_list {
-    int destination;
-    int weight;
-    struct Node_list* next;
+    int destination; // Pra onde essa aresta leva.
+    int weight; // Peso da aresta.
+    struct Node_list* next; // Leva pra próxima aresta disponivel no vértice.
 } Node_list;
 
 // Estrutura do grafo por lista de adjacência.
