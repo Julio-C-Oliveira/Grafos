@@ -18,6 +18,9 @@ Regra da Ponte: Se uma aresta (v,w) é uma ponte no grafo induzido pelas arestas
 então (v,w) só deve ser escolhido pelo algoritmo caso não exista qualquer outra opção.
 */
 
-void fleury_list() {
-    
+void fleury_list(AdjacentGraph_list* graph, int startVertex) {
+    Node_list* currentNode = graph->adjacentList[startVertex];
+    while (currentNode != NULL) {
+        currentNode = currentNode->next;
+    }
 }
