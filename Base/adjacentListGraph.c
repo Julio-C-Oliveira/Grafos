@@ -60,3 +60,48 @@ void freeGraph_list(AdjacentGraph_list* graph) {
 int getNumberOfVertices_list(AdjacentGraph_list* graph) {
     return graph->numberOfVertices;
 }
+
+AdjacentGraph_list* copyAdjacentGraph_list(AdjacentGraph_list* graph) {
+    if (graph == NULL)
+        return NULL;
+    
+    AdjacentGraph_list* copy = createAdjacentGraph_list(graph->numberOfVertices, graph->driven);
+
+    for (int i = 0; i < graph->numberOfVertices; i++) {
+        Node_list* currentNode = graph->adjacentList[i];
+        Node_list** currentCopy = &(copy->adjacentList[i]);
+
+        while (currentNode != NULL) {
+            *currentCopy = createNode_list(currentNode->destination, currentNode->weight);
+            currentCopy = &((*currentCopy)->next);
+            currentNode = currentNode->next;
+        }
+    }
+    return copy;
+}
+
+void removeEdge_list(AdjacentGraph_list* graph, int origin, int destination) {
+    Node_list** currentNode = &(graph->adjacentList[origin]);
+    while (*currentNode != NULL) {
+        if ((*currentNode)->destination == destination) {
+            Node_list* temporaryNode = *currentNode; // Registrando o nó que será removido.
+            *currentNode = (*currentNode)->next; // Pulando o nó que será removido.
+            free(temporaryNode); // Excluindo o nó.
+            break;
+        }
+        currentNode = &((*currentNode)->next);
+    }
+
+    if (!graph->driven) {
+        currentNode = &(graph->adjacentList[destination]);
+        while (*currentNode != NULL) {
+            if ((*currentNode)->destination == origin) {
+                Node_list* temporaryNode = *currentNode;
+                *currentNode = (*currentNode)->next;
+                free(temporaryNode);
+                break;
+            }
+            currentNode = &((*currentNode)->next);
+        }
+    }
+}

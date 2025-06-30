@@ -26,4 +26,8 @@ void freeGraph_list(AdjacentGraph_list* graph);
 
 int getNumberOfVertices_list(AdjacentGraph_list* graph);
 
+AdjacentGraph_list* copyAdjacentGraph_list(AdjacentGraph_list* graph);
+
+void removeEdge_list(AdjacentGraph_list* graph, int origin, int destination);
+
 #endif 
